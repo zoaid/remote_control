@@ -1,0 +1,263 @@
+{
+  "intents": [
+    {
+      "intent": "Admin",
+      "examples": [
+        {
+          "text": "admin"
+        },
+        {
+          "text": "Manager"
+        },
+        {
+          "text": "Person"
+        },
+        {
+          "text": "who is the main?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "chat",
+      "examples": [
+        {
+          "text": "ask me"
+        },
+        {
+          "text": "chat"
+        },
+        {
+          "text": "say somethings"
+        },
+        {
+          "text": "talk to me"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "doing",
+      "examples": [
+        {
+          "text": "what do I do?"
+        },
+        {
+          "text": "what do u do?"
+        },
+        {
+          "text": "what do you do?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Hi",
+      "examples": [
+        {
+          "text": "good afternoon"
+        },
+        {
+          "text": "good eveinig"
+        },
+        {
+          "text": "good morning"
+        },
+        {
+          "text": "hello"
+        },
+        {
+          "text": "help"
+        },
+        {
+          "text": "Hi"
+        },
+        {
+          "text": "welcome"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "robot_name",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "who you are",
+          "synonyms": [
+            "tell me your name",
+            "what is u'r name",
+            "what is your name"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_2_1625676743613",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi , i'm zo , how can i help you?\nChat?\n what do I do? \n who is the main?"
+              },
+              {
+                "text": "Hello , i'm zo , how can i help you?\nChat?\n what do I do? \n who is the main?"
+              },
+              {
+                "text": "welcome , i'm zo , how can i help you?\nChat?\n what do I do? \n who is the main?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "#Hi",
+      "dialog_node": "node_2_1625676743613",
+      "previous_sibling": "node_7_1625678896678"
+    },
+    {
+      "type": "standard",
+      "title": "chat",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I'm sorry, I'll talk to you later (:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#chat",
+      "dialog_node": "node_7_1625678896678",
+      "previous_sibling": "node_9_1625679609201"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I'm a robot under maintenance now, and I'll be up and running soon. Be ready."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#doing",
+      "dialog_node": "node_9_1625679609201",
+      "previous_sibling": "node_9_1625679901916"
+    },
+    {
+      "type": "standard",
+      "title": "admin",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can contact me via number : 00011122\nGitHub page link: https://github.com/zoaid\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#Admin",
+      "dialog_node": "node_9_1625679901916",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Hello",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "speaking skill",
+  "language": "en",
+  "description": ""
+}
